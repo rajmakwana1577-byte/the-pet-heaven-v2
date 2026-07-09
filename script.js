@@ -1709,3 +1709,163 @@ console.log(
     "%c🔥 Advanced UX Loaded",
     "color:#e91e63;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   FINAL PERFORMANCE OPTIMIZATION
+========================================================== */
+
+window.addEventListener("load", () => {
+
+    document.body.classList.add("loaded");
+
+    console.log("✅ Website Fully Loaded");
+
+});
+
+/* ==========================================================
+   Image Error Fallback
+========================================================== */
+
+document.querySelectorAll("img").forEach(img => {
+
+    img.addEventListener("error", () => {
+
+        img.src = "images/placeholder.webp";
+
+    });
+
+});
+
+/* ==========================================================
+   Network Status
+========================================================== */
+
+function updateNetwork() {
+
+    console.log(
+        navigator.onLine
+            ? "🌐 Online"
+            : "📴 Offline"
+    );
+
+}
+
+window.addEventListener("online", updateNetwork);
+window.addEventListener("offline", updateNetwork);
+
+updateNetwork();
+
+/* ==========================================================
+   Disable Double Tap Zoom
+========================================================== */
+
+let lastTouchEnd = 0;
+
+document.addEventListener("touchend", (event) => {
+
+    const now = Date.now();
+
+    if (now - lastTouchEnd <= 300) {
+
+        event.preventDefault();
+
+    }
+
+    lastTouchEnd = now;
+
+}, { passive: false });
+
+/* ==========================================================
+   Scroll To Top On Logo Click
+========================================================== */
+
+const logo = document.querySelector(".logo");
+
+if (logo) {
+
+    logo.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        window.scrollTo({
+
+            top: 0,
+            behavior: "smooth"
+
+        });
+
+    });
+
+}
+
+/* ==========================================================
+   Current Year
+========================================================== */
+
+const year = document.querySelector("#year");
+
+if (year) {
+
+    year.textContent = new Date().getFullYear();
+
+}
+
+/* ==========================================================
+   FPS Friendly Animation Pause
+========================================================== */
+
+document.addEventListener("visibilitychange", () => {
+
+    document.body.classList.toggle(
+        "paused",
+        document.hidden
+    );
+
+});
+
+/* ==========================================================
+   Service Worker Register
+========================================================== */
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", async () => {
+
+        try {
+
+            await navigator.serviceWorker.register("./service-worker.js");
+
+            console.log("✅ Service Worker Registered");
+
+        } catch (err) {
+
+            console.warn("⚠ Service Worker Not Registered");
+
+        }
+
+    });
+
+}
+
+/* ==========================================================
+   Cleanup
+========================================================== */
+
+window.addEventListener("beforeunload", () => {
+
+    console.clear();
+
+});
+
+/* ==========================================================
+   FINAL CONSOLE
+========================================================== */
+
+console.log(
+"%c🐾 THE PET HEAVEN v3.1 READY",
+"background:#ff4f87;color:#fff;font-size:18px;padding:8px 16px;border-radius:8px;font-weight:bold;"
+);
+
+console.log("🚀 Premium Mobile Website Loaded Successfully");
+console.log("💖 Developed with Love");
+console.log("📱 Android Optimized");
+console.log("⚡ PWA Ready");
