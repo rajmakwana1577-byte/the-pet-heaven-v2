@@ -1091,3 +1091,200 @@ console.log(
 "%c📲 PWA Features Loaded",
 "color:#2196f3;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   Premium Cursor Effect
+========================================================== */
+
+const cursor = document.querySelector(".custom-cursor");
+
+if (cursor) {
+
+    document.addEventListener("mousemove", (e) => {
+
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+
+    });
+
+}
+
+/* ==========================================================
+   Button Hover Animation
+========================================================== */
+
+document.querySelectorAll(
+".btn,.book-btn,.contact-btn"
+).forEach(btn => {
+
+    btn.addEventListener("mouseenter", () => {
+
+        btn.animate([
+
+            { transform: "scale(1)" },
+            { transform: "scale(1.06)" },
+            { transform: "scale(1)" }
+
+        ], {
+
+            duration: 300
+
+        });
+
+    });
+
+});
+
+/* ==========================================================
+   Card Tilt Effect
+========================================================== */
+
+document.querySelectorAll(
+".service-card,.gallery-item,.testimonial-card"
+).forEach(card => {
+
+    card.addEventListener("mousemove", (e) => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateX = ((y / rect.height) - 0.5) * -10;
+        const rotateY = ((x / rect.width) - 0.5) * 10;
+
+        card.style.transform =
+`perspective(1000px)
+rotateX(${rotateX}deg)
+rotateY(${rotateY}deg)
+translateY(-6px)`;
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform = "";
+
+    });
+
+});
+
+/* ==========================================================
+   Floating Paw Effect
+========================================================== */
+
+function createPaw() {
+
+    if (document.hidden) return;
+
+    const paw = document.createElement("div");
+
+    paw.innerHTML = "🐾";
+
+    paw.style.position = "fixed";
+    paw.style.left = Math.random() * window.innerWidth + "px";
+    paw.style.bottom = "-40px";
+    paw.style.fontSize = (18 + Math.random() * 20) + "px";
+    paw.style.opacity = ".18";
+    paw.style.pointerEvents = "none";
+    paw.style.zIndex = "999";
+    paw.style.transition = "6s linear";
+
+    document.body.appendChild(paw);
+
+    setTimeout(() => {
+
+        paw.style.transform = "translateY(-110vh) rotate(360deg)";
+        paw.style.opacity = "0";
+
+    }, 100);
+
+    setTimeout(() => {
+
+        paw.remove();
+
+    }, 6500);
+
+}
+
+setInterval(createPaw, 3500);
+
+/* ==========================================================
+   Success Confetti
+========================================================== */
+
+function successEffect() {
+
+    for (let i = 0; i < 25; i++) {
+
+        const dot = document.createElement("span");
+
+        dot.style.position = "fixed";
+        dot.style.left = (window.innerWidth / 2) + "px";
+        dot.style.top = (window.innerHeight / 2) + "px";
+        dot.style.width = "8px";
+        dot.style.height = "8px";
+        dot.style.borderRadius = "50%";
+        dot.style.background =
+`hsl(${Math.random() * 360},90%,60%)`;
+
+        dot.style.pointerEvents = "none";
+        dot.style.zIndex = "9999";
+
+        document.body.appendChild(dot);
+
+        const x = (Math.random() - 0.5) * 500;
+        const y = (Math.random() - 0.5) * 500;
+
+        dot.animate([
+
+            {
+                transform: "translate(0,0)",
+                opacity: 1
+            },
+
+            {
+                transform: `translate(${x}px,${y}px)`,
+                opacity: 0
+            }
+
+        ], {
+
+            duration: 1200,
+            easing: "ease-out"
+
+        });
+
+        setTimeout(() => {
+
+            dot.remove();
+
+        }, 1200);
+
+    }
+
+}
+
+/* ==========================================================
+   Trigger Success Effect
+========================================================== */
+
+const bookingButton = document.querySelector(".book-btn");
+
+if (bookingButton) {
+
+    bookingButton.addEventListener("click", () => {
+
+        setTimeout(successEffect, 300);
+
+    });
+
+}
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+"%c✨ Premium Micro Animations Loaded",
+"color:#9c27b0;font-size:15px;font-weight:bold"
+);
