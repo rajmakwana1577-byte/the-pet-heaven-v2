@@ -1467,3 +1467,245 @@ console.log(
 "%c🚀 Performance Optimizations Loaded",
 "color:#ff5722;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   HERO AUTO SLIDER
+========================================================== */
+
+const heroSlides = document.querySelectorAll(".hero-slide");
+
+let heroIndex = 0;
+
+function heroSlider() {
+
+    if (heroSlides.length <= 1) return;
+
+    heroSlides.forEach(slide => {
+
+        slide.classList.remove("active");
+
+    });
+
+    heroIndex++;
+
+    if (heroIndex >= heroSlides.length) {
+
+        heroIndex = 0;
+
+    }
+
+    heroSlides[heroIndex].classList.add("active");
+
+}
+
+if (heroSlides.length > 1) {
+
+    setInterval(heroSlider, 5000);
+
+}
+
+/* ==========================================================
+   Swipe Support
+========================================================== */
+
+let heroStartX = 0;
+
+const heroSection = document.querySelector(".hero");
+
+if (heroSection && heroSlides.length > 1) {
+
+    heroSection.addEventListener("touchstart", (e) => {
+
+        heroStartX = e.changedTouches[0].clientX;
+
+    });
+
+    heroSection.addEventListener("touchend", (e) => {
+
+        const heroEndX = e.changedTouches[0].clientX;
+
+        if (heroEndX - heroStartX > 60) {
+
+            heroIndex--;
+
+            if (heroIndex < 0) {
+
+                heroIndex = heroSlides.length - 1;
+
+            }
+
+        }
+
+        if (heroStartX - heroEndX > 60) {
+
+            heroIndex++;
+
+            if (heroIndex >= heroSlides.length) {
+
+                heroIndex = 0;
+
+            }
+
+        }
+
+        heroSlides.forEach(slide => {
+
+            slide.classList.remove("active");
+
+        });
+
+        heroSlides[heroIndex].classList.add("active");
+
+    });
+
+}
+
+/* ==========================================================
+   Favorite Heart Animation
+========================================================== */
+
+document.querySelectorAll(".favorite-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        btn.classList.toggle("liked");
+
+        btn.animate(
+
+            [
+                { transform: "scale(1)" },
+                { transform: "scale(1.35)" },
+                { transform: "scale(1)" }
+            ],
+
+            {
+
+                duration: 400
+
+            }
+
+        );
+
+    });
+
+});
+
+/* ==========================================================
+   Notification Bar
+========================================================== */
+
+function notify(message) {
+
+    const note = document.createElement("div");
+
+    note.className = "notification";
+
+    note.textContent = message;
+
+    document.body.appendChild(note);
+
+    setTimeout(() => {
+
+        note.classList.add("show");
+
+    }, 50);
+
+    setTimeout(() => {
+
+        note.classList.remove("show");
+
+        setTimeout(() => {
+
+            note.remove();
+
+        }, 300);
+
+    }, 3000);
+
+}
+
+/* ==========================================================
+   Welcome Notification
+========================================================== */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        notify("🐾 Welcome to THE PET HEAVEN");
+
+    }, 1800);
+
+});
+
+/* ==========================================================
+   Scroll Direction
+========================================================== */
+
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+
+    const current = window.scrollY;
+
+    const nav = document.querySelector(".navbar");
+
+    if (!nav) return;
+
+    if (current > lastScroll && current > 150) {
+
+        nav.style.transform = "translateY(-100%)";
+
+    } else {
+
+        nav.style.transform = "translateY(0)";
+
+    }
+
+    lastScroll = current;
+
+});
+
+/* ==========================================================
+   Auto Highlight Buttons
+========================================================== */
+
+setInterval(() => {
+
+    document.querySelectorAll(
+
+        ".book-btn,.btn-primary"
+
+    ).forEach(btn => {
+
+        btn.animate(
+
+            [
+
+                { boxShadow: "0 0 0 rgba(255,79,135,.2)" },
+
+                { boxShadow: "0 0 25px rgba(255,79,135,.55)" },
+
+                { boxShadow: "0 0 0 rgba(255,79,135,.2)" }
+
+            ],
+
+            {
+
+                duration: 1800
+
+            }
+
+        );
+
+    });
+
+}, 5000);
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+    "%c🔥 Advanced UX Loaded",
+    "color:#e91e63;font-size:15px;font-weight:bold"
+);
