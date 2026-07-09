@@ -1,4 +1,4 @@
-const CACHE_NAME = "pet-heaven-v1";
+const CACHE_NAME = "pet-heaven-v2";
 
 const urlsToCache = [
   "./",
