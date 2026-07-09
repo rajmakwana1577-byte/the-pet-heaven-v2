@@ -1,3 +1,4 @@
+throw new Error("TEST ERROR");
 /* ==========================================================
    THE PET HEAVEN
    Premium Mobile JavaScript v3.1
