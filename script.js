@@ -699,3 +699,224 @@ console.log(
     "%c📅 Booking System Loaded",
     "color:#25D366;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   Animated Counter
+========================================================== */
+
+const counters = document.querySelectorAll(".counter");
+
+if ("IntersectionObserver" in window && counters.length) {
+
+    const counterObserver = new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting) return;
+
+                const counter = entry.target;
+                const target = Number(counter.dataset.target || 0);
+
+                let current = 0;
+
+                const speed = Math.max(1, target / 120);
+
+                function update() {
+
+                    current += speed;
+
+                    if (current < target) {
+
+                        counter.textContent = Math.floor(current);
+
+                        requestAnimationFrame(update);
+
+                    } else {
+
+                        counter.textContent = target.toLocaleString();
+
+                    }
+
+                }
+
+                update();
+
+                counterObserver.unobserve(counter);
+
+            });
+
+        },
+
+        {
+
+            threshold: .5
+
+        }
+
+    );
+
+    counters.forEach(counter => {
+
+        counterObserver.observe(counter);
+
+    });
+
+}
+
+/* ==========================================================
+   Floating Animation
+========================================================== */
+
+document.querySelectorAll(
+".service-card,.testimonial-card,.gallery-item"
+).forEach((card,index)=>{
+
+    card.animate(
+
+        [
+
+            {transform:"translateY(0)"},
+
+            {transform:"translateY(-6px)"},
+
+            {transform:"translateY(0)"}
+
+        ],
+
+        {
+
+            duration:3500+(index*250),
+
+            iterations:Infinity,
+
+            easing:"ease-in-out"
+
+        }
+
+    );
+
+});
+
+/* ==========================================================
+   Hero Image Parallax
+========================================================== */
+
+const heroParallaxImage = document.querySelector(".hero-image img");
+
+window.addEventListener("scroll",()=>{
+
+    if(!heroParallaxImage) return;
+
+    const y = window.scrollY * .15;
+
+    heroParallaxImage.style.transform =
+
+    `translateY(${y}px) scale(1.02)`;
+
+});
+
+/* ==========================================================
+   Count Up Badge
+========================================================== */
+
+document.querySelectorAll(".count-badge").forEach((badge,index)=>{
+
+    let value = 0;
+
+    const max = Number(badge.dataset.count || 100);
+
+    const timer = setInterval(()=>{
+
+        value++;
+
+        badge.textContent = value;
+
+        if(value>=max){
+
+            clearInterval(timer);
+
+        }
+
+    },20+(index*5));
+
+});
+
+/* ==========================================================
+   Pulse Animation
+========================================================== */
+
+document.querySelectorAll(
+".book-btn,.floating-whatsapp"
+).forEach(btn=>{
+
+    setInterval(()=>{
+
+        btn.animate(
+
+            [
+
+                {transform:"scale(1)"},
+
+                {transform:"scale(1.08)"},
+
+                {transform:"scale(1)"}
+
+            ],
+
+            {
+
+                duration:900
+
+            }
+
+        );
+
+    },5000);
+
+});
+
+/* ==========================================================
+   Lazy Image Fade
+========================================================== */
+
+const lazyFadeImages = document.querySelectorAll("img");
+
+if("IntersectionObserver" in window){
+
+    const imageObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.style.opacity="1";
+
+                entry.target.style.transition="opacity .6s ease";
+
+                imageObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    });
+
+    lazyFadeImages.forEach(img=>{
+
+        img.style.opacity=".2";
+
+        imageObserver.observe(img);
+
+    });
+
+}
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+"%c📊 Counter & Animations Loaded",
+"color:#ff9800;font-size:15px;font-weight:bold"
+);
