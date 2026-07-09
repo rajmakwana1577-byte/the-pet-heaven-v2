@@ -194,7 +194,12 @@ font-size:38px;
 animation:pulse 1.2s ease-in-out infinite;
 
 }
-
+#loader.hide{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .45s ease, visibility .45s ease;
+}
 .loader-box h2{
 
 margin-top:20px;
