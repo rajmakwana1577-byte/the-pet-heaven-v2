@@ -304,3 +304,218 @@ console.log(
     "%c✨ Scroll Effects Loaded",
     "color:#00aa55;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   Premium Gallery Lightbox
+========================================================== */
+
+const lightbox = $("#lightbox");
+const lightboxImage = $("#lightboxImage");
+const closeLightbox = $(".lightbox-close");
+const prevImage = $(".lightbox-prev");
+const nextImage = $(".lightbox-next");
+
+const galleryImages = [...$$(".gallery-item img")];
+
+let currentImage = 0;
+
+/* ==========================================================
+   Open Lightbox
+========================================================== */
+
+function openLightbox(index){
+
+    if(!lightbox || !lightboxImage) return;
+    if(!galleryImages.length) return;
+
+    currentImage = index;
+
+    lightboxImage.src = galleryImages[currentImage].src;
+
+    lightbox.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+galleryImages.forEach((img,index)=>{
+
+    img.addEventListener("click",()=>{
+
+        openLightbox(index);
+
+    });
+
+});
+
+/* ==========================================================
+   Close
+========================================================== */
+
+function hideLightbox(){
+
+    if(!lightbox) return;
+
+    lightbox.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+}
+
+if(closeLightbox){
+
+    closeLightbox.addEventListener("click",hideLightbox);
+
+}
+
+/* ==========================================================
+   Next Image
+========================================================== */
+
+function showNext(){
+
+    if(!galleryImages.length) return;
+
+    currentImage++;
+
+    if(currentImage >= galleryImages.length){
+
+        currentImage = 0;
+
+    }
+
+    lightboxImage.src = galleryImages[currentImage].src;
+
+}
+
+/* ==========================================================
+   Previous Image
+========================================================== */
+
+function showPrevious(){
+
+    if(!galleryImages.length) return;
+
+    currentImage--;
+
+    if(currentImage < 0){
+
+        currentImage = galleryImages.length - 1;
+
+    }
+
+    lightboxImage.src = galleryImages[currentImage].src;
+
+}
+
+if(nextImage){
+
+    nextImage.addEventListener("click",(e)=>{
+
+        e.stopPropagation();
+
+        showNext();
+
+    });
+
+}
+
+if(prevImage){
+
+    prevImage.addEventListener("click",(e)=>{
+
+        e.stopPropagation();
+
+        showPrevious();
+
+    });
+
+}
+
+/* ==========================================================
+   Close Outside Image
+========================================================== */
+
+if(lightbox){
+
+    lightbox.addEventListener("click",(e)=>{
+
+        if(e.target === lightbox){
+
+            hideLightbox();
+
+        }
+
+    });
+
+}
+
+/* ==========================================================
+   Keyboard Support
+========================================================== */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(!lightbox) return;
+
+    if(!lightbox.classList.contains("active")) return;
+
+    switch(e.key){
+
+        case "Escape":
+            hideLightbox();
+            break;
+
+        case "ArrowRight":
+            showNext();
+            break;
+
+        case "ArrowLeft":
+            showPrevious();
+            break;
+
+    }
+
+});
+
+/* ==========================================================
+   Swipe Support (Mobile)
+========================================================== */
+
+let startX = 0;
+
+if(lightbox){
+
+    lightbox.addEventListener("touchstart",(e)=>{
+
+        startX = e.changedTouches[0].clientX;
+
+    });
+
+    lightbox.addEventListener("touchend",(e)=>{
+
+        const endX = e.changedTouches[0].clientX;
+
+        if(startX - endX > 50){
+
+            showNext();
+
+        }
+
+        if(endX - startX > 50){
+
+            showPrevious();
+
+        }
+
+    });
+
+}
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+"%c🖼 Premium Gallery Loaded",
+"color:#ff4f87;font-size:15px;font-weight:bold"
+);
