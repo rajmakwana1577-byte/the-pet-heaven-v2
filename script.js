@@ -920,3 +920,174 @@ console.log(
 "%c📊 Counter & Animations Loaded",
 "color:#ff9800;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   PWA Install Prompt
+========================================================== */
+
+let deferredPrompt = null;
+
+const installPopup = document.querySelector(".install-popup");
+const installBtn = document.querySelector("#installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+
+    e.preventDefault();
+
+    deferredPrompt = e;
+
+    if (installPopup) {
+
+        installPopup.style.display = "flex";
+
+    }
+
+});
+
+if (installBtn) {
+
+    installBtn.addEventListener("click", async () => {
+
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+
+        await deferredPrompt.userChoice;
+
+        deferredPrompt = null;
+
+        if (installPopup) {
+
+            installPopup.style.display = "none";
+
+        }
+
+    });
+
+}
+
+/* ==========================================================
+   Close Install Popup
+========================================================== */
+
+const closeInstall = document.querySelector(".install-close");
+
+if (closeInstall) {
+
+    closeInstall.addEventListener("click", () => {
+
+        if (installPopup) {
+
+            installPopup.style.display = "none";
+
+        }
+
+    });
+
+}
+
+/* ==========================================================
+   Online / Offline Status
+========================================================== */
+
+function showToast(message) {
+
+    const toast = document.querySelector("#toast");
+
+    if (!toast) return;
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+
+}
+
+window.addEventListener("online", () => {
+
+    showToast("🌐 Internet Connected");
+
+});
+
+window.addEventListener("offline", () => {
+
+    showToast("📴 No Internet Connection");
+
+});
+
+/* ==========================================================
+   Page Visibility
+========================================================== */
+
+document.addEventListener("visibilitychange", () => {
+
+    console.log(
+        document.hidden
+            ? "⏸ Page Hidden"
+            : "▶ Page Active"
+    );
+
+});
+
+/* ==========================================================
+   Performance Timer
+========================================================== */
+
+window.addEventListener("load", () => {
+
+    console.log(
+        "⚡ Loaded in",
+        performance.now().toFixed(0),
+        "ms"
+    );
+
+});
+
+/* ==========================================================
+   Disable Image Drag & Right Click
+========================================================== */
+
+document.querySelectorAll("img").forEach(img => {
+
+    img.setAttribute("draggable", "false");
+
+    img.addEventListener("contextmenu", e => {
+
+        e.preventDefault();
+
+    });
+
+});
+
+/* ==========================================================
+   Auto Close Mobile Menu
+========================================================== */
+
+document.querySelectorAll(".mobile-menu a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        const menu = document.querySelector(".mobile-menu");
+
+        if (menu) {
+
+            menu.classList.remove("active");
+
+        }
+
+    });
+
+});
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+"%c📲 PWA Features Loaded",
+"color:#2196f3;font-size:15px;font-weight:bold"
+);
