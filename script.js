@@ -1288,3 +1288,182 @@ console.log(
 "%c✨ Premium Micro Animations Loaded",
 "color:#9c27b0;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   Image Lazy Loading
+========================================================== */
+
+const lazyLoadImages = document.querySelectorAll("img");
+
+if ("IntersectionObserver" in window && lazyLoadImages.length) {
+
+    const lazyObserver = new IntersectionObserver(
+
+        (entries, observer) => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting) return;
+
+                const img = entry.target;
+
+                if (img.dataset.src) {
+
+                    img.src = img.dataset.src;
+
+                }
+
+                img.classList.add("loaded");
+
+                observer.unobserve(img);
+
+            });
+
+        },
+
+        {
+
+            rootMargin: "100px"
+
+        }
+
+    );
+
+    lazyLoadImages.forEach(img => {
+
+        lazyObserver.observe(img);
+
+    });
+
+}
+
+/* ==========================================================
+   Image Fade Animation
+========================================================== */
+
+document.querySelectorAll("img").forEach(img => {
+
+    img.addEventListener("load", () => {
+
+        img.style.opacity = "1";
+        img.style.transform = "scale(1)";
+
+    });
+
+});
+
+/* ==========================================================
+   Preload Hero Image
+========================================================== */
+
+const heroPreloadImage = document.querySelector(".hero img");
+
+if (heroPreloadImage) {
+
+    const preload = new Image();
+
+    preload.src = heroPreloadImage.src;
+
+}
+
+/* ==========================================================
+   Auto Theme Detection
+========================================================== */
+
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+function detectTheme() {
+
+    console.log(
+        prefersDark.matches
+            ? "🌙 Dark Mode Preferred"
+            : "☀️ Light Mode Preferred"
+    );
+
+}
+
+detectTheme();
+
+prefersDark.addEventListener("change", detectTheme);
+
+/* ==========================================================
+   Visitor Session Counter
+========================================================== */
+
+let visits =
+Number(sessionStorage.getItem("petHeavenVisit")) || 0;
+
+visits++;
+
+sessionStorage.setItem("petHeavenVisit", visits);
+
+console.log("👤 Session Visit :", visits);
+
+/* ==========================================================
+   Save Scroll Position
+========================================================== */
+
+window.addEventListener("beforeunload", () => {
+
+    sessionStorage.setItem(
+        "scrollPosition",
+        window.scrollY
+    );
+
+});
+
+window.addEventListener("load", () => {
+
+    const scroll =
+        sessionStorage.getItem("scrollPosition");
+
+    if (scroll) {
+
+        window.scrollTo({
+
+            top: Number(scroll)
+
+        });
+
+    }
+
+});
+
+/* ==========================================================
+   Device Detection
+========================================================== */
+
+const isMobile =
+/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+console.log(
+isMobile
+? "📱 Mobile Device"
+: "💻 Desktop Device"
+);
+
+/* ==========================================================
+   Small Vibration
+========================================================== */
+
+document.querySelectorAll(".btn,.book-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        if ("vibrate" in navigator) {
+
+            navigator.vibrate(20);
+
+        }
+
+    });
+
+});
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+"%c🚀 Performance Optimizations Loaded",
+"color:#ff5722;font-size:15px;font-weight:bold"
+);
