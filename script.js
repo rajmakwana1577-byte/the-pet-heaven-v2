@@ -3,7 +3,7 @@
    Premium Mobile JavaScript v3.1
    Part 1
 ========================================================== */
-
+alert("JS Started");
 "use strict";
 
 /* ==========================================================
@@ -28,7 +28,8 @@ window.addEventListener("load", () => {
         loader.classList.add("hide");
 
         setTimeout(() => {
-            loader.remove();
+         alert("Removing Loader");
+           loader.remove();
         }, 500);
 
     }, 800);
