@@ -519,3 +519,183 @@ console.log(
 "%c🖼 Premium Gallery Loaded",
 "color:#ff4f87;font-size:15px;font-weight:bold"
 );
+/* ==========================================================
+   WhatsApp Booking Form
+========================================================== */
+
+const bookingForm = $("#bookingForm");
+const toast = $("#toast");
+
+if (bookingForm) {
+
+    bookingForm.addEventListener("submit", (e) => {
+
+        e.preventDefault();
+
+        const ownerInput = bookingForm.querySelector('input[placeholder="Owner Name"]');
+        const petInput = bookingForm.querySelector('input[placeholder="Pet Name"]');
+        const mobileInput = bookingForm.querySelector('input[placeholder="Mobile Number"]');
+        const serviceInput = bookingForm.querySelector("select");
+        const dateInput = bookingForm.querySelector('input[type="date"]');
+        const timeInput = bookingForm.querySelector('input[type="time"]');
+        const detailsInput = bookingForm.querySelector("textarea");
+
+        const owner = ownerInput ? ownerInput.value.trim() : "";
+        const pet = petInput ? petInput.value.trim() : "";
+        const mobile = mobileInput ? mobileInput.value.trim() : "";
+        const service = serviceInput ? serviceInput.value : "";
+        const date = dateInput ? dateInput.value : "";
+        const time = timeInput ? timeInput.value : "";
+        const details = detailsInput ? detailsInput.value.trim() : "";
+
+        if (!owner) {
+            alert("Please enter Owner Name");
+            return;
+        }
+
+        if (!pet) {
+            alert("Please enter Pet Name");
+            return;
+        }
+
+        if (mobile.length < 10) {
+            alert("Please enter valid Mobile Number");
+            return;
+        }
+
+        if (!service) {
+            alert("Please select Service");
+            return;
+        }
+
+        const message =
+`🐾 *THE PET HEAVEN*
+
+📅 *New Appointment*
+
+👤 Owner : ${owner}
+
+🐶 Pet : ${pet}
+
+📱 Mobile : ${mobile}
+
+✂ Service : ${service}
+
+📆 Date : ${date}
+
+🕒 Time : ${time}
+
+📝 Details : ${details}
+
+Thank You ❤️`;
+
+        window.open(
+            "https://wa.me/919510108013?text=" +
+            encodeURIComponent(message),
+            "_blank"
+        );
+
+        if (toast) {
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+
+                toast.classList.remove("show");
+
+            }, 3000);
+
+        }
+
+        bookingForm.reset();
+
+    });
+
+}
+
+/* ==========================================================
+   Input Animation
+========================================================== */
+
+$$(".booking-form input, .booking-form textarea, .booking-form select")
+
+.forEach(input => {
+
+    input.addEventListener("focus", () => {
+
+        if (input.parentElement) {
+
+            input.parentElement.style.transform = "scale(1.02)";
+
+        }
+
+    });
+
+    input.addEventListener("blur", () => {
+
+        if (input.parentElement) {
+
+            input.parentElement.style.transform = "scale(1)";
+
+        }
+
+    });
+
+});
+
+/* ==========================================================
+   Button Ripple Effect
+========================================================== */
+
+$$("button").forEach(button => {
+
+    button.style.position = "relative";
+    button.style.overflow = "hidden";
+
+    button.addEventListener("click", (e) => {
+
+        const ripple = document.createElement("span");
+
+        const size = Math.max(
+            button.clientWidth,
+            button.clientHeight
+        );
+
+        const rect = button.getBoundingClientRect();
+
+        ripple.style.width = size + "px";
+        ripple.style.height = size + "px";
+
+        ripple.style.left =
+            (e.clientX - rect.left - size / 2) + "px";
+
+        ripple.style.top =
+            (e.clientY - rect.top - size / 2) + "px";
+
+        ripple.style.position = "absolute";
+        ripple.style.borderRadius = "50%";
+        ripple.style.background = "rgba(255,255,255,.35)";
+        ripple.style.transform = "scale(0)";
+        ripple.style.animation = "ripple .6s linear";
+        ripple.style.pointerEvents = "none";
+
+        button.appendChild(ripple);
+
+        setTimeout(() => {
+
+            ripple.remove();
+
+        }, 600);
+
+    });
+
+});
+
+/* ==========================================================
+   Console
+========================================================== */
+
+console.log(
+    "%c📅 Booking System Loaded",
+    "color:#25D366;font-size:15px;font-weight:bold"
+);
