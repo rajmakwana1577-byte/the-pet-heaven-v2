@@ -2558,3 +2558,318 @@ padding-bottom:70px;
 }
 
    }
+/* ==========================================================
+   FINAL PERFORMANCE & RESPONSIVE
+   THE PET HEAVEN v3.1
+========================================================== */
+
+/* ==========================
+   Global Performance
+========================== */
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+overflow-x:hidden;
+
+-webkit-font-smoothing:antialiased;
+
+-moz-osx-font-smoothing:grayscale;
+
+text-rendering:optimizeLegibility;
+
+}
+
+/* ==========================
+   Faster Images
+========================== */
+
+img{
+
+max-width:100%;
+
+height:auto;
+
+display:block;
+
+image-rendering:auto;
+
+}
+
+/* ==========================
+   Prevent Layout Shift
+========================== */
+
+.hero-image,
+.about-image,
+.service-image,
+.gallery-item,
+.compare-card,
+.customer img{
+
+overflow:hidden;
+
+}
+
+/* ==========================
+   Better Touch Experience
+========================== */
+
+button,
+a,
+.book-btn,
+.contact-btn,
+.btn-primary,
+.btn-outline{
+
+touch-action:manipulation;
+
+}
+
+/* ==========================
+   Reduce Heavy Animation
+========================== */
+
+.service-card,
+.gallery-item,
+.testimonial-card,
+.contact-card,
+.info-card,
+.feature-card,
+.stat-card{
+
+will-change:transform;
+
+}
+
+.service-card:hover,
+.gallery-item:hover,
+.testimonial-card:hover,
+.contact-card:hover,
+.info-card:hover,
+.feature-card:hover,
+.stat-card:hover{
+
+transform:translateY(-4px);
+
+}
+
+/* ==========================
+   Disable Expensive Effects
+========================== */
+
+.service-card::before,
+.service-card::after,
+.gallery-item::before,
+.gallery-item::after{
+
+pointer-events:none;
+
+}
+
+/* ==========================
+   Mobile Optimization
+========================== */
+
+@media(max-width:767px){
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.hero-image img{
+
+height:300px;
+
+}
+
+.about-image img{
+
+height:320px;
+
+}
+
+.service-image{
+
+height:200px;
+
+}
+
+.gallery-item img{
+
+height:170px;
+
+}
+
+.counter-item h2{
+
+font-size:34px;
+
+}
+
+.section-header h2{
+
+font-size:28px;
+
+}
+
+.footer{
+
+padding-bottom:95px;
+
+}
+
+}
+
+/* ==========================
+   Tablet
+========================== */
+
+@media(min-width:768px){
+
+.container{
+
+max-width:720px;
+
+}
+
+}
+
+/* ==========================
+   Desktop
+========================== */
+
+@media(min-width:1200px){
+
+.container{
+
+max-width:1140px;
+
+}
+
+.hero h1{
+
+font-size:56px;
+
+}
+
+.hero-image img{
+
+height:520px;
+
+}
+
+}
+
+/* ==========================
+   Reduce Motion Support
+========================== */
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+
+animation:none !important;
+
+transition:none !important;
+
+scroll-behavior:auto !important;
+
+}
+
+}
+
+/* ==========================
+   Focus Accessibility
+========================== */
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus{
+
+outline:2px solid var(--primary);
+
+outline-offset:3px;
+
+}
+
+/* ==========================
+   Scrollbar
+========================== */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#f7f7f7;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:var(--primary);
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:var(--primary-dark);
+
+}
+
+/* ==========================
+   Selection
+========================== */
+
+::selection{
+
+background:var(--primary);
+
+color:#fff;
+
+}
+
+/* ==========================
+   Pause Class
+========================== */
+
+.paused *{
+
+animation-play-state:paused !important;
+
+}
+
+/* ==========================
+   Loaded State
+========================== */
+
+.loaded #loader{
+
+opacity:0;
+
+visibility:hidden;
+
+pointer-events:none;
+
+}
+
+/* ==========================
+   Final Console Marker
+========================== */
+
+/* THE PET HEAVEN CSS v3.1 FINAL */
